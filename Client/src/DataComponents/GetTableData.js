@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import {Button, Box} from '@mui/material'
-import Delete from "./Delete";
+import Delete from "../unusedComponents/Delete";
 import EditDialog from "./EditDialog";
 import { addDeletedEntry, setTrackingEntry} from "../redux/trackingSlice";
 import {DataGrid} from '@mui/x-data-grid';

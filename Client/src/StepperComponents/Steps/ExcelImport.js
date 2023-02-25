@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../App.css";
 import { Paper, Button } from "@mui/material";
-import GetTableData from "../../components/GetTableData";
+import GetTableData from "../../DataComponents/GetTableData";
 import DThreeComp from '../../components/DThreeComp';
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
@@ -40,11 +40,13 @@ const ExcelImport = () => {
     const tempFile = e.target.files[0];
     if (tempFile) {
       if (getExtensions(tempFile)) {
+
         const formData = new FormData();
         formData.append("myfile", tempFile);
 
         Axios.post(`${original_url}/excel/upload`, formData)
           .then((res) => {
+            console.log(`posted`)
             dispatch(fileUpload({ file: tempFile }));
             toast.success("Excel file Uploaded", {
               position: toast.POSITION.TOP_CENTER,
@@ -95,7 +97,8 @@ const ExcelImport = () => {
         style={{
           // height: '100vh',
           margin: "auto",
-          width: "90vw",
+          width: "25vw",
+          height: '25vh',
           marginBottom: "1%",
           marginTop: "1%",
           paddingLeft: "1%",
@@ -107,7 +110,7 @@ const ExcelImport = () => {
       >
         {!showBarGraph ? <input type="file" onChange={(e) => HandleFileUpload(e)} /> : null}
         {/* {fileUploaded ? <Button variant="contained" onClick={() => handleGetTableData()}>GetTableData</Button> : null} */}
-        <Button variant="contained" onClick={() => handlePurge()}>Purge</Button>
+        {/* <Button variant="contained" onClick={() => handlePurge()}>Purge</Button> */}
         {/* {showTable ? <Button variant="contained" onClick={generateBarGraph}>Generate Assessment Score Data Graph</Button>: null} */}
         <ToastContainer />
         {/* <div
@@ -118,8 +121,8 @@ const ExcelImport = () => {
             height: 500,
           }}
         > */}
-          {/* {showTable ? <GetTableData /> : null}
-          {!showTable && showBarGraph ? <DThreeComp /> : null} */}
+          {showTable ? <GetTableData /> : null}
+          {/* {!showTable && showBarGraph ? <DThreeComp /> : null} */}
         {/* </div> */}
       </Paper>
     </div>

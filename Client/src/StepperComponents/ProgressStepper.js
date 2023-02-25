@@ -20,7 +20,7 @@ import {Link} from 'react-router-dom';
 //import stepper reducers
 import {activeStepFwdReducer, activeStepBackReducer, completedStepReducer, resetStateReducer} from '../redux/stepperSlice';
 import ExcelImport from "../StepperComponents/Steps/ExcelImport";
-import GetTableData from "../components/GetTableData";
+import GetTableData from "../DataComponents/GetTableData";
 import DThreeComp from "../components/DThreeComp";
 import { getDataByAssessmentName, setGenerateInputData} from "../redux/tableSlice";
 import { renderToString } from "react-dom/server";
@@ -105,7 +105,7 @@ const ProgressStepper = () => {
 
   return (
     <div className="Progress-stepper">
-      <Stepper activeStep={activeStep} sx={{p: 5}}>
+      <Stepper activeStep={activeStep} sx={{marginTop: 5, p: 5}}>
         {steps.map((step) => (
           <Step key={step}>
             <StepLabel>{step}</StepLabel>

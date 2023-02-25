@@ -6,6 +6,8 @@ import thunk from 'redux-thunk';
 import trackingReducer from './trackingSlice';
 import tableReducer from './tableSlice';
 import stepperReducer from './stepperSlice';
+import renderReducer from './renderSlice';
+import traineeReducer from './traineeSlice';
 
 const persistConfig = {
     key: 'root',
@@ -17,7 +19,9 @@ const reducers = combineReducers({
   files: fileUploadReducer,
   tracking: trackingReducer,
   table: tableReducer,
-  stepper: stepperReducer
+  stepper: stepperReducer,
+  render: renderReducer,
+  trainee: traineeReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers);

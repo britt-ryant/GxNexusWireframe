@@ -31,6 +31,7 @@ let storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 router.post('/upload', upload.single('myfile'), (req, res) => {
+    console.log(`hitting`)
     const {file} = req
     if(!file){
         res.send({error: true, message: "Please make sure there is a file uploaded!"})

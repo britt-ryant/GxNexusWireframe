@@ -7,6 +7,7 @@ const mysql = require('mysql2');
 const uploadRoute = require('./Routes/uploadRoute');
 const dbRoute = require('./Routes/dbRoute');
 const trackingRoute = require('./Routes/trackingRoute');
+const traineeRoute = require('./Routes/traineeRoute');
 
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(bodyparser.urlencoded({ extended: true}));
 app.use('/excel', uploadRoute);
 app.use('/data', dbRoute);
 app.use('/trace', trackingRoute);
+app.use('/trainees', traineeRoute);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running, listening on port ${port}`.green.bold));

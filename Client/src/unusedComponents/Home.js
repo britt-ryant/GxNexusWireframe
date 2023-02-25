@@ -11,9 +11,9 @@ import Axios from "axios";
 import { PURGE } from "redux-persist";
 import { Button, Box, OutlinedInput } from "@mui/material";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import GetTableData from "./GetTableData";
+import GetTableData from "../DataComponents/GetTableData";
 import { setTrackingTableName } from "../redux/trackingSlice";
-import DThreeComp from "./DThreeComp";
+import DThreeComp from "../components/DThreeComp";
 import { getDataByAssessmentName, renderBarGraph, setGenerateInputData } from "../redux/tableSlice";
 
 const original_url = "http://localhost:5000";
