@@ -31,7 +31,7 @@ export const getTraineeById = createAsyncThunk(
 );
 
 export const getTraineesByCohort = createAsyncThunk(
-    'trainee/getCohort',
+    'trainee/getOneCohort',
     async(payload) => {
         console.log(payload);
         const response = await fetch(`http://localhost:5000/trainees/${payload.tableName}/cohort/${payload.cohort}`)
@@ -45,7 +45,7 @@ export const getTraineesByCohort = createAsyncThunk(
 );
 
 export const getTotalCohorts = createAsyncThunk(
-    'trainee/getCohort',
+    'trainee/allCohorts',
     async(payload) => {
         console.log(payload);
         const response = await fetch(`http://localhost:5000/trainees/${payload.tableName}/cohort/all`)
@@ -67,11 +67,11 @@ const initialState = {
     currentTraineeId: "",
     allTrainees: [],
     allTraineesColumns: [
-        {field: "EmpNumber", headerName: "Employee Id", width: 100, editable: true},
-        {field: "FirstName", headerName: "First Name", width: 100, editable: true},
-        {field: "LastName", headerName: "Last Name", width: 100, editable: true},
-        {field: "City", headerName: "City", width: 100, editable: true},
-        {field: "TrainingPath", headerName: "Training Path", width: 100, editable: true},
+        {field: "EmpNumber", headerName: "Employee Id", width: 100, editable: false},
+        {field: "FirstName", headerName: "First Name", width: 100, editable: false},
+        {field: "LastName", headerName: "Last Name", width: 100, editable: false},
+        {field: "City", headerName: "City", width: 100, editable: false},
+        {field: "TrainingPath", headerName: "Training Path", width: 100, editable: false},
     ],
     allCohorts: [],
     allCohortColumns: [
@@ -100,7 +100,11 @@ export const traineeSlice = createSlice({
             state.renderCurrentTrainee = action.payload;
         },
         setRenderCurrentCohortReducer: (state, action) => {
-            state.renderCurrentCohort = !state.renderCurrentCohort;
+            state.renderCurrentCohort = action.payload;
+        },
+        resetDialogRenderReducer: (state, action) => {
+            state.renderCurrentTrainee = false;
+            state.renderCurrentCohort = false;
         }
     },
     extraReducers: {
@@ -119,13 +123,15 @@ export const traineeSlice = createSlice({
         },
         [getTraineeById.fulfilled]: (state, action) => {
             console.log(action.payload)
-            state.currentTrainee = action.payload
+            state.currentTrainee = action.payload;
+            state.renderCurrentTrainee = true;
         },
         [getTraineesByCohort.pending]: (state, action) => {
             console.log(`getting distinct cohort`)
         },
         [getTraineesByCohort.fulfilled]: (state, action) => {
             state.currentCohort = action.payload;
+            state.renderCurrentCohort = true;
         },
         [getTotalCohorts.pending]: (state, action) => {
             console.log(`Getting all cohorts`)
@@ -141,6 +147,6 @@ export const traineeSlice = createSlice({
 });
 
 
-export const {setSelectedTraineeReducer, setRenderAllTraineesReducer, setRenderCurrentTraineeReducer, setRenderCurrentCohortReducer} = traineeSlice.actions;
+export const {setSelectedTraineeReducer, setRenderAllTraineesReducer, setRenderCurrentTraineeReducer, setRenderCurrentCohortReducer, resetDialogRenderReducer} = traineeSlice.actions;
 export default traineeSlice.reducer;
 

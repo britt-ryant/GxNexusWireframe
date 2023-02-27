@@ -25,6 +25,8 @@ import CoPresentIcon from '@mui/icons-material/CoPresent';
 //import redux components
 import { useDispatch, useSelector } from 'react-redux';
 import { setDrawerOpenReducer, navBarButtonClickReducer } from '../redux/renderSlice';
+import Header from '../HeaderComponents/Header';
+import TopNavButtons from '../HeaderComponents/TopNavButtons';
 
 
 
@@ -141,9 +143,7 @@ export default function Nav() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" onClick={handleHomeClick}>
-            Header
-          </Typography>
+            <TopNavButtons />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

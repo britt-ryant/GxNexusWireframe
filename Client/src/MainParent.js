@@ -7,16 +7,19 @@ import {PURGE} from 'redux-persist';
 //import components
 import Header from './HeaderComponents/Header';
 import NavBar from './HeaderComponents/NavBar';
-import HomePage from './components/HomePage';
+import HomePage from './unusedComponents/HomePage';
 import ProgressStepper from './StepperComponents/ProgressStepper';
 import TraineeLandingPage from './TraineeComponents/TraineeLandingPage';
 import Nav from './NewComp/Nav';
 
 //import MUI
 import { Box } from '@mui/system';
-import { Button, Grid } from '@mui/material';
+import { Button, Dialog, Grid, Typography } from '@mui/material';
 import Landing from './NewComp/LandingPage';
-import { getTotalCohorts, getTraineesByCohort } from './redux/traineeSlice';
+import { getTotalCohorts, getTraineesByCohort, resetDialogRenderReducer } from './redux/traineeSlice';
+import { renderDialogComponentReducer } from './redux/renderSlice';
+import ProfileManager from './ProfileComponents/ProfileManager';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 //bring in redux state as props
@@ -30,7 +33,8 @@ class MainParent extends React.Component{
         this.showState = this.showState.bind(this);
         this.handlePurge = this.handlePurge.bind(this);
         this.getOneCohort = this.getOneCohort.bind(this);
-        this.getAllCohorts = this.getAllCohorts.bind(this)
+        this.getAllCohorts = this.getAllCohorts.bind(this);
+        this.handleDialogClose = this.handleDialogClose.bind(this);
         
     }
     componentRender(){
@@ -41,7 +45,7 @@ class MainParent extends React.Component{
                 return console.log(`render cohorts`);
             case "Trainees":
                 return <TraineeLandingPage />;
-            case "Assignment": 
+            case "Assignments": 
                 return console.log(`render assignments`);
             case "Reports":
                 return console.log(`render Reports`);
@@ -74,29 +78,36 @@ class MainParent extends React.Component{
 
     showState(){
         console.log(this.props.render.navButtons);
+    };
+
+    handleDialogClose(){
+        const {dispatch} = this.props;
+        dispatch(renderDialogComponentReducer());
+        dispatch(resetDialogRenderReducer())
     }
     render(){
         return(
             <>
-                <Box sx={{flexGrow: 1}}>
-                    <Grid container spacing={2} key={1}>
+                <Box sx={{flexGrow: 1, border: '2px solid black'}} >
+                    <Dialog open={this.props.render.renderDialog} 
+                            onClose={this.handleDialogClose} 
+                            // fullWidth
+                            fullScreen
+                            >
+                            {/* <Button sx={{width: '2px'}} onClick={this.handleDialogClose}><CloseIcon /></Button> */}
+                            <Header />
+                            <ProfileManager />
+                    </Dialog>
+                    <Grid container spacing={2} key={1} >
                         <Grid item xs={2} mt={10}>
-                            {/* <NavBar /> */}\
                             <Nav />
                         </Grid>
                         <Grid item xs={8} key={2}>
-                            {/* {this.props.files.fileUploaded ?  this.componentRender() : <ProgressStepper />} */}
                             {this.componentRender()}
-                            {/* <Button onClick={this.handlePurge}>PURGE</Button>
-                            <Button onClick={this.getAllCohorts}>get all</Button>
-                            <Button onClick={() => this.getOneCohort('O2A')}>Get One Cohort</Button> */}
-                            {/* <Button onClick={this.handlePurge}>PURGE</Button> */}
-                            
-                            {/* <Button onClick={this.handlePurge}>PURGE</Button> */}
+                            <Button onClick={this.handlePurge}>PURGE</Button>
                         </Grid>
                     </Grid>
                 </Box>
-                {/* <Header /> */}
             </>
         )
     }

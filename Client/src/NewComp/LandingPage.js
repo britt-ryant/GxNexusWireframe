@@ -7,17 +7,18 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { DataGrid } from "@mui/x-data-grid";
+// import Accordion from "@mui/material/Accordion";
+// import AccordionDetails from "@mui/material/AccordionDetails";
+// import AccordionSummary from "@mui/material/AccordionSummary";
+// import Typography from "@mui/material/Typography";
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// import { DataGrid } from "@mui/x-data-grid";
 
 //import redux components
 import { useSelector, useDispatch } from "react-redux";
-import { navBarButtonClickReducer } from "../redux/renderSlice";
+import { navBarButtonClickReducer, renderExtraPagesReducer} from "../redux/renderSlice";
 import { getTotalCohorts, getAllTrainees } from "../redux/traineeSlice";
+import AccordionComp from "../DataComponents/AccordianComp";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -56,79 +57,79 @@ export default function Landing() {
     const dataLoaded = useSelector((state) => state.files.fileUploaded);
     const tableName = useSelector((state) => state.files.tableName)
 
-    const traineeColumns = useSelector((state) => state.trainee.allTraineesColumns);
-    const allTrainees = useSelector((state) => state.trainee.allTrainees);
+    // const traineeColumns = useSelector((state) => state.trainee.allTraineesColumns);
+    // const allTrainees = useSelector((state) => state.trainee.allTrainees);
 
-    const cohortColumns = useSelector((state) => state.trainee.allCohortColumns);
-    const allCohorts = useSelector((state) => state.trainee.allCohorts);
+    // const cohortColumns = useSelector((state) => state.trainee.allCohortColumns);
+    // const allCohorts = useSelector((state) => state.trainee.allCohorts);
 
 
     const dispatch = useDispatch();
 
-    React.useEffect(() => {
+    // React.useEffect(() => {
 
-        if(allTrainees.length === 0 && allCohorts.length === 0 && dataLoaded){
-            dispatch(getTotalCohorts({tableName}));
-            dispatch(getAllTrainees({tableName}))
-        }
-    },[])
+    //     if(allTrainees.length === 0 && allCohorts.length === 0 && dataLoaded){
+    //         dispatch(getTotalCohorts({tableName}));
+    //         dispatch(getAllTrainees({tableName}))
+    //     }
+    // },[])
 
-    const renderAccordians = () => {
-        return(
-            <React.Fragment>
-                <Grid item xs={20} mt={-20}>
-                    <Grid container justifyContent="center" spacing={10}>
-                        <Grid item xs={5}>
-                        <div>
-                            <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography>Trainees</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                            <div style={{ height: 400, width: '100%' }}>
-                                <DataGrid
-                                rows={allTrainees}
-                                columns={traineeColumns}
-                                pageSize={5}
-                                rowsPerPageOptions={[5]}
-                                />
-                                </div>
-                            </AccordionDetails>
-                            </Accordion>
-                        </div>
-                        </Grid>
-                        <Grid item xs={5}>
-                        <div>
-                            <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel2a-content"
-                                id="panel2a-header"
-                            >
-                                <Typography>Cohorts</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                            <div style={{ height: 400, width: '100%' }}>
-                                <DataGrid
-                                rows={allCohorts}
-                                columns={cohortColumns}
-                                pageSize={5}
-                                rowsPerPageOptions={[5]}
-                                />
-                                </div>
-                            </AccordionDetails>
-                            </Accordion>
-                        </div>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </React.Fragment>
-        )
-    };
+    // const renderAccordians = () => {
+    //     return(
+    //         <React.Fragment>
+    //             <Grid item xs={20} mt={-20}>
+    //                 <Grid container justifyContent="center" spacing={10}>
+    //                     <Grid item xs={5}>
+    //                     <div>
+    //                         <Accordion>
+    //                         <AccordionSummary
+    //                             expandIcon={<ExpandMoreIcon />}
+    //                             aria-controls="panel1a-content"
+    //                             id="panel1a-header"
+    //                         >
+    //                             <Typography>Trainees</Typography>
+    //                         </AccordionSummary>
+    //                         <AccordionDetails>
+    //                         <div style={{ height: 400, width: '100%' }}>
+    //                             <DataGrid
+    //                             rows={allTrainees}
+    //                             columns={traineeColumns}
+    //                             pageSize={5}
+    //                             rowsPerPageOptions={[5]}
+    //                             />
+    //                             </div>
+    //                         </AccordionDetails>
+    //                         </Accordion>
+    //                     </div>
+    //                     </Grid>
+    //                     <Grid item xs={5}>
+    //                     <div>
+    //                         <Accordion>
+    //                         <AccordionSummary
+    //                             expandIcon={<ExpandMoreIcon />}
+    //                             aria-controls="panel2a-content"
+    //                             id="panel2a-header"
+    //                         >
+    //                             <Typography>Cohorts</Typography>
+    //                         </AccordionSummary>
+    //                         <AccordionDetails>
+    //                         <div style={{ height: 400, width: '100%' }}>
+    //                             <DataGrid
+    //                             rows={allCohorts}
+    //                             columns={cohortColumns}
+    //                             pageSize={5}
+    //                             rowsPerPageOptions={[5]}
+    //                             />
+    //                             </div>
+    //                         </AccordionDetails>
+    //                         </Accordion>
+    //                     </div>
+    //                     </Grid>
+    //                 </Grid>
+    //             </Grid>
+    //         </React.Fragment>
+    //     )
+    // };
 
     const renderUploadDataButton = () => {
         return(
@@ -144,7 +145,7 @@ export default function Landing() {
 
     const renderUploadDataPage = () => {
         console.log(`go to upload data page`);
-        dispatch(navBarButtonClickReducer(1))
+        dispatch(renderExtraPagesReducer(1))
     }
 
 
@@ -187,7 +188,9 @@ export default function Landing() {
             {!dataLoaded ? renderUploadDataButton() : null}
           </Grid>
         </Grid>
-        {dataLoaded && allTrainees.length !== 0 && allCohorts.length !== 0 ? renderAccordians() : null}
+        {/* {dataLoaded && allTrainees.length !== 0 && allCohorts.length !== 0 ? renderAccordians() : null} */}
+        {tableName ? <AccordionComp /> : null}
+        
       </Grid>
     </div>
   );

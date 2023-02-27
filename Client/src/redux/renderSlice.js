@@ -10,15 +10,23 @@ import CoPresentIcon from '@mui/icons-material/CoPresent';
 const initialState = {
     navButtons: [
         {text: "Home", icon: null},
-        {text: "Upload Data", icon: null},
+        // {text: "Upload Data", icon: null},
         {text: "Cohorts", icon: null},
-        {text: "Trainees", icon: null},
-        {text: "Assignments", icon: null},
-        {text: "Reports", icon: null},
+        // {text: "Trainees", icon: null},
+        // {text: "Assignments", icon: null},
+        // {text: "Reports", icon: null},
+        {text: "Project History", icon: null},
+        {text: "Active Roster", icon: null},
+        {text: "Contact Us", icon: null},
         {text: "Setting", icon: null},
     ],
     clickedButton: "",
     drawerOpen: false,
+    extraPages: [
+        {text: "Assignments", icon: null},
+        {text: "Upload Data", icon: null},
+    ],
+    renderDialog: false,
 }
 
 export const renderSlice = createSlice({
@@ -30,10 +38,17 @@ export const renderSlice = createSlice({
         },
         setDrawerOpenReducer: (state, action) => {
             state.drawerOpen = !state.drawerOpen;
+        },
+        renderExtraPagesReducer: (state, action) => {
+            state.clickedButton = state.extraPages[action.payload].text
+        },
+        renderDialogComponentReducer: (state, action) => {
+            state.renderDialog = !state.renderDialog
         }
+
     }
 })
 
 
-export const {navBarButtonClickReducer, setDrawerOpenReducer} = renderSlice.actions;
+export const {navBarButtonClickReducer, setDrawerOpenReducer, renderExtraPagesReducer, renderDialogComponentReducer} = renderSlice.actions;
 export default renderSlice.reducer;
